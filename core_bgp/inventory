@@ -1,0 +1,12 @@
+[all:vars]
+
+[junos]
+edge1
+edge2
+edge3
+
+[junos:vars]
+username=ansible
+password=ansible1
+ansible_connection=local
+dev_os=junos

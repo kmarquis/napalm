@@ -1,0 +1,26 @@
+[edit interfaces ge-0/0/2]
++   description "LINK to Host1";
++   encapsulation ethernet-ccc;
+[edit interfaces ge-0/0/2 unit 0]
++    description "L2VPN Instance Host1 to Host2";
+-    family inet;
++    family ccc;
+[edit]
++  routing-instances {
++      Host1-to-Host2 {
++          instance-type l2vpn;
++          interface ge-0/0/2.0;
++          route-distinguisher 100:0001;
++          vrf-target target:100:1001;
++          protocols {
++              l2vpn {
++                  encapsulation-type ethernet;
++                  interface ge-0/0/2.0;
++                  site Host1 {
++                      site-identifier 1;
++                      interface ge-0/0/2.0;
++                  }
++              }
++          }
++      }
++  }

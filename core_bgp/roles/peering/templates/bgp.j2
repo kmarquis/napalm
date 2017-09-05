@@ -1,0 +1,25 @@
+{% for group, bgp_group in devices[inventory_hostname].group.items() %}
+protocols {
+    bgp {
+        group {{ group }} {
+            local-as {{ bgp_group.asn }};
+            type {{ bgp_group.type }};              
+            local-address {{ bgp_group.local_add }};
+            family inet {
+                unicast;
+            }
+            family inet-vpn {
+                unicast;
+            }
+            family l2vpn {
+                signaling;
+            }
+{% for peer, peer_val in bgp_group.peer.items() %}
+            neighbor {{ peer }} {
+                description "{{ peer_val.description }}";
+            }
+{% endfor %}
+        }
+    }
+}
+{% endfor %}

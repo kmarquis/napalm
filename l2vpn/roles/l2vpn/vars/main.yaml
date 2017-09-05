@@ -1,0 +1,27 @@
+---
+devices:
+  edge2:
+    interface:
+      'ge-0/0/2':
+        description: LINK to Host1
+        log_description: L2VPN Instance Host1 to Host2
+    l2vpn:
+      'Host1-to-Host2':
+        vrf_rd: 100:0001
+        vrf_rt: 100:1001
+        site: Host1
+        site_id: 1
+        interface: ge-0/0/2
+  edge3:
+    interface:
+      'ge-0/0/3':
+        description: LINK to Host2
+        log_description: L2VPN Instance Host2 to Host1
+    l2vpn:
+      'Host2-to-Host1':
+        vrf_rd: 100:0002
+        vrf_rt: 100:1001
+        site: Host2
+        site_id: 2
+        interface: ge-0/0/3
+
