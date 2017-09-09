@@ -1,0 +1,12 @@
+[all:vars]
+
+[junos]
+pe1
+pe3
+pe4
+
+[junos:vars]
+username=root
+password=Juniper
+ansible_connection=local
+dev_os=junos
