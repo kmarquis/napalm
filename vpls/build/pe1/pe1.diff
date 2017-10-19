@@ -1,0 +1,39 @@
+[edit interfaces ge-0/0/3]
++   description "VPLS LINK to CE1";
++   encapsulation ethernet-vpls;
+[edit interfaces ge-0/0/3 unit 0]
+-      family inet;
++      family vpls;
+[edit]
++  routing-instances {
++      vpls_customer_a {
++          instance-type vpls;
++          interface ge-0/0/3.0;
++          route-distinguisher 100:0001;
++          provider-tunnel {
++              rsvp-te {
++                  label-switched-path-template {
++                      default-template;
++                  }
++              }
++          }
++          vrf-target target:100:1001;
++          protocols {
++              vpls {
++                  site-range 20;
++                  mac-table-size {
++                      16;
++                  }
++                  interface-mac-limit {
++                      5;
++                      packet-action drop;
++                  }
++                  no-tunnel-services;
++                  site Customer_a1 {
++                      site-identifier 1;
++                      interface ge-0/0/3.0;
++                  }
++              }
++          }
++      }
++  }

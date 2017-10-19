@@ -13,11 +13,21 @@
         register: "build_dir"
     - set_fact: 
         build_dir: "{{playbook_dir}}/{{ build_dir }}/{{ inventory_hostname }}"
-        device_conf: "{{ build_dir }}/conf_{{ inventory_hostname }}.conf"
+        device_conf: "{{ build_dir }}/{{ inventory_hostname }}.conf"
     - name: delete previous build directory
-      file: path={{ build_dir }} state=absent
+      file: 
+        path={{ build_dir }} 
+        state=absent
+      changed_when: no
+      check_mode: no
     - name: create host build directory
-      file: path={{ build_dir }} state=directory recurse=yes mode=0755
+      file: 
+        path={{ build_dir }} 
+        state=directory 
+        recurse=yes 
+        mode=0755
+      changed_when: no
+      check_mode: no
 
 # =========================================================
 # Role based config template building - 
@@ -31,7 +41,10 @@
     - l2vpn
   tasks:
     - name: assembling configurations
-      assemble: src={{ build_dir }} dest={{ device_conf }} mode="0644"
+      assemble: 
+        src={{ build_dir }} 
+        dest={{ device_conf }} 
+        mode="0644"
 
 # =========================================================
 # Napalm Config device push  
@@ -50,7 +63,7 @@
         optional_args:
          format: set
         config_file: "{{ build_dir }}/{{ inventory_hostname }}.conf"
-        commit_changes: true
+        commit_changes: "{{ not ansible_check_mode }}"
         replace_config: false
         get_diffs: true
         diff_file: "{{ build_dir }}/{{ inventory_hostname }}.diff"

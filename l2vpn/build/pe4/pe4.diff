@@ -1,0 +1,27 @@
+[edit interfaces ge-0/0/4]
+-   description "VPLS LINK to CE7";
++   description "L2VPN to CE1";
+-   encapsulation ethernet-vpls;
++   encapsulation ethernet-ccc;
+[edit interfaces ge-0/0/4]
++    unit 0 {
++        description "L2VPN Instance PE4 - PE1";
++        family ccc;
++    }
+[edit routing-instances]
++   CE7_to_CE1 {
++       instance-type l2vpn;
++       interface ge-0/0/4.0;
++       route-distinguisher 100:0014;
++       vrf-target target:100:1001;
++       protocols {
++           l2vpn {
++               encapsulation-type ethernet;
++               interface ge-0/0/4.0;
++               site CE7 {
++                   site-identifier 2;
++                   interface ge-0/0/4.0;
++               }
++           }
++       }
++   }

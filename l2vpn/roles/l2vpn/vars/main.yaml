@@ -1,27 +1,27 @@
 ---
 devices:
-  edge2:
-    interface:
-      'ge-0/0/2':
-        description: LINK to Host1
-        log_description: L2VPN Instance Host1 to Host2
-    l2vpn:
-      'Host1-to-Host2':
-        vrf_rd: 100:0001
-        vrf_rt: 100:1001
-        site: Host1
-        site_id: 1
-        interface: ge-0/0/2
-  edge3:
+  pe1:
     interface:
       'ge-0/0/3':
-        description: LINK to Host2
-        log_description: L2VPN Instance Host2 to Host1
+        description: L2VPN to CE1
+        log_description: L2VPN Instance PE1 - PE4
     l2vpn:
-      'Host2-to-Host1':
-        vrf_rd: 100:0002
+      'CE1_to_CE7':
+        vrf_rd: 100:0011
         vrf_rt: 100:1001
-        site: Host2
-        site_id: 2
+        site: CE1
+        site_id: 1
         interface: ge-0/0/3
+  pe4:
+    interface:
+      'ge-0/0/4':
+        description: L2VPN to CE1
+        log_description: L2VPN Instance PE4 - PE1
+    l2vpn:
+      'CE7_to_CE1':
+        vrf_rd: 100:0014
+        vrf_rt: 100:1001
+        site: CE7
+        site_id: 2
+        interface: ge-0/0/4
 

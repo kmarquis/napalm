@@ -1,11 +1,11 @@
 [all:vars]
 
 [junos]
-edge2
-edge3
+pe1
+pe4
 
 [junos:vars]
-username=ansible
-password=ansible1
+username=root
+password=Juniper
 ansible_connection=local
 dev_os=junos

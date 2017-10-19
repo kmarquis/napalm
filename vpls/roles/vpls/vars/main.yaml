@@ -10,7 +10,7 @@ devices:
         vrf_rt: 100:1001
         template: default-template
         site_range_id: 20
-        mac_table_size: 10
+        mac_table_size: 16
         mac_limit: 5
         vpls_site:
            "Customer_a1":
@@ -26,7 +26,7 @@ devices:
         vrf_rt: 100:1001
         template: default-template
         site_range_id: 20
-        mac_table_size: 10
+        mac_table_size: 16
         mac_limit: 5
         vpls_site:
            "Customer_a1":
@@ -42,7 +42,7 @@ devices:
         vrf_rt: 100:1001
         template: default-template
         site_range_id: 20
-        mac_table_size: 10
+        mac_table_size: 16
         mac_limit: 5
         vpls_site:
            "Customer_a1":
