@@ -7,24 +7,24 @@ from prettytable import PrettyTable
 
 with open(sys.argv[1]) as f:
     for line in f:
-        ip_addr, platform = line.split()
+        ip_addr, platform = line.strip().split()
 
 driver = napalm.get_network_driver(platform)
 
 dev = driver(username=username,
-	         optional_args={
-	             'use_keys': True,
-	             'key_file': path, 
-	         },
-	         hostname=ip_addr,)
+             optional_args={
+                 'use_keys': True,
+                 'key_file': path, 
+             },
+             hostname=ip_addr,)
 
 def main(devices):
-	#Open Connection Devices
-	print('Opening Connection')
+    #Open Connection Devices
+    print('Opening Connection')
     dev.open()
 
-	#Using get_facts getter the device(s): Hostname, Vender, Serial
-	#Number and Model will be collected
+    #Using get_facts getter the device(s): Hostname, Vender, Serial
+    #Number and Model will be collected
     vendor = dev.get_facts()['vendor']
     model = dev.get_facts()['model']
     sn = dev.get_facts()['serial_number']
