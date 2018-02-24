@@ -1,4 +1,14 @@
 #!/usr/bin/env python
+#
+# This can be run using python2 or python3
+# 
+# $ python3 checkRafas.py devices
+# +----------+---------+-------------------+---------------+---------------+
+# | Hostname |  Vendor |       Model       | Serial Number |   OS Version  |
+# +----------+---------+-------------------+---------------+---------------+
+# | cisco_xr |  Cisco  |    XRV-P-L--CH    |  XRV-SN---CH  |     6.1.2     |
+# |  junos   | Juniper | FIREFLY-PERIMETER |  eb260bb5c34c | 12.1X47-D15.4 |
+# +----------+---------+-------------------+---------------+---------------+
 import napalm
 import sys
 import os
@@ -26,11 +36,12 @@ def printDevices(dev):
 
     #Using get_facts getter the device(s): Hostname, Vender, Serial
     #Number and Model will be collected
-    vendor = dev.get_facts()['vendor']
-    model = dev.get_facts()['model']
-    sn = dev.get_facts()['serial_number']
-    hostname = dev.get_facts()['hostname']
-    os = dev.get_facts()['os_version']
+    facts = dev.get_facts()
+    vendor = facts['vendor']
+    model = facts['model']
+    sn = facts['serial_number']
+    hostname = facts['hostname']
+    os = facts['os_version']
     #Using the PrettyTable Module, this will create a table and
     #be populated with the variables collected from get_facts
     table.add_row([ hostname, vendor , model , sn , os ])
